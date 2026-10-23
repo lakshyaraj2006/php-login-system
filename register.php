@@ -22,6 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       "message" => $username_err,
       "type" => ALERT_ERROR
     ];
+    header("location: register.php");
+    exit;
   } else {
     $sql = "SELECT id FROM users WHERE username = ?";
     $stmt = mysqli_prepare($conn, $sql);
@@ -40,6 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "message" => $username_err,
             "type" => ALERT_ERROR
           ];
+          header("location: register.php");
+          exit;
         } else {
           $username = trim($_POST["username"]);
         }
@@ -56,12 +60,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "message" => $password_err,
         "type" => ALERT_ERROR
       ];
+      header("location: register.php");
+      exit;
     } else if (strlen(trim($_POST["password"])) < 5) {
       $password_err = "Password cannot be less than 5 characters";
       $_SESSION["alert"] = [
         "message" => $password_err,
         "type" => ALERT_ERROR
       ];
+      header("location: register.php");
+      exit;
     } else {
       $password = $_POST["password"];
     }
@@ -73,12 +81,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "message" => $confirm_password_err,
         "type" => ALERT_ERROR
       ];
+      header("location: register.php");
+      exit;
     } elseif ($_POST["confirm_password"] !== $_POST["password"]) {
       $confirm_password_err = "Passwords do not match";
       $_SESSION["alert"] = [
         "message" => $confirm_password_err,
         "type" => ALERT_ERROR
       ];
+      header("location: register.php");
+      exit;
     }
 
     // If there were no errors, go ahead and insert into the database

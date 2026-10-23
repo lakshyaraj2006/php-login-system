@@ -21,6 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "message" => $err,
             "type" => ALERT_ERROR
         ];
+        header("location: login.php");
+        exit;
     } else {
         $username = trim($_POST["username"]);
         $password = trim($_POST["password"]);
@@ -65,6 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         "message" => $err,
                         "type" => ALERT_ERROR
                     ];
+                    header("location: login.php");
+                    exit;
                 }
             } else {
                 echo "Something went wrong :(";
